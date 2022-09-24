@@ -9,7 +9,6 @@ class FizzBuzzService implements FizzBuzzServiceInterface
 
   function __construct()
   {
-    // code...
   }
 
   /**
@@ -25,6 +24,12 @@ class FizzBuzzService implements FizzBuzzServiceInterface
       return $numberSeries;
   }
 
+  /**
+   * @param int $offset
+   * @param int $limit
+   *
+   * @return array
+   */
   private function getNumberSeries(int $offset, int $limit): array
   {
     return range($offset, $limit);
