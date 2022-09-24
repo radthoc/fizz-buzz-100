@@ -1,6 +1,6 @@
 # FizzBuzz
 
-Exercise to print the numbers from 1 to 100.
+Print the numbers from 1 to 100.
 
 ###Rules
 
