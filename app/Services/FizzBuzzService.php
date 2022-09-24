@@ -18,8 +18,15 @@ class FizzBuzzService implements FizzBuzzServiceInterface
    *
    * @return array
    */
-  public function generateSeries(int $offset, int $LimitIterator): array
+  public function generateSeries(int $offset, int $limit): array
   {
-      return [];
+      $numberSeries = $this->getNumberSeries($offset, $limit);
+
+      return $numberSeries;
+  }
+
+  private function getNumberSeries(int $offset, int $limit): array
+  {
+    return range($offset, $limit);
   }
 }
