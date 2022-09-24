@@ -12,10 +12,10 @@ class FizzBuzzServiceTest extends TestCase
      *
      * @return void
      */
-    public function testSeries100Test()
+    public function testBasicSeries()
     {
         $offset = 1;
-        $limit = 10;
+        $limit = 2;
 
         $expectedValue = $this->getExpectedValue($offset, $limit);
 
