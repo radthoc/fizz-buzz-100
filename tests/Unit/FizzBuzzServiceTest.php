@@ -8,11 +8,11 @@ use App\Services\FizzBuzzService;
 class FizzBuzzServiceTest extends TestCase
 {
     /**
-     * A basic test example.
+     * Basic test case
      *
      * @return void
      */
-    public function testBasicSeries()
+    public function testBasicSeriesCase()
     {
         $offset = 1;
         $limit = 2;
@@ -23,6 +23,27 @@ class FizzBuzzServiceTest extends TestCase
 
         $this->assertEquals(
           $expectedValue,
+          $fizzBuzzService->generateSeries($offset, $limit)
+        );
+    }
+
+
+    /**
+     * Basic test case
+     *
+     * @return void
+     */
+    public function testFizzCase()
+    {
+        $offset = 1;
+        $limit = 3;
+
+        $expectedFizzValue = [1, 2, 'Fizz'];
+
+        $fizzBuzzService = $this->app->make(FizzBuzzService::class);
+
+        $this->assertEquals(
+          $expectedFizzValue,
           $fizzBuzzService->generateSeries($offset, $limit)
         );
     }
