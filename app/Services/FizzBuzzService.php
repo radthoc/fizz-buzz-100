@@ -7,7 +7,10 @@ namespace App\Services;
 class FizzBuzzService implements FizzBuzzServiceInterface
 {
   const FIZZ = 'Fizz';
+  const FIZZ_FACTOR = 3;
+
   const BUZZ = 'Buzz';
+  const BUZZ_FACTOR = 5;
 
   function __construct()
   {
@@ -26,11 +29,11 @@ class FizzBuzzService implements FizzBuzzServiceInterface
       foreach ($this->getNumberSeries($offset, $limit) as $number) {
           $numberInSeries = $number;
 
-          if ($this->isMultipleOf(3,$number)) {
+          if ($this->isMultipleOf(self::FIZZ_FACTOR,$number)) {
               $numberInSeries = self::FIZZ;
           }
 
-          if ($this->isMultipleOf(5,$number)) {
+          if ($this->isMultipleOf(self::BUZZ_FACTOR,$number)) {
               $numberInSeries = self::BUZZ;
           }
 
