@@ -17,7 +17,7 @@ class FizzBuzzServiceTest extends TestCase
         $offset = 1;
         $limit = 2;
 
-        $expectedValue = $this->getExpectedValue($offset, $limit);
+        $expectedValue = [1, 2];
 
         $fizzBuzzService = $this->app->make(FizzBuzzService::class);
 
@@ -72,5 +72,42 @@ class FizzBuzzServiceTest extends TestCase
     private function getExpectedValue(int $offset, int $limit): array
     {
       return range($offset, $limit);
+    }
+
+
+    /**
+     * Basic test case
+     *
+     * @return void
+     */
+    public function testFizzBuzzCase()
+    {
+        $offset = 1;
+        $limit = 15;
+
+        $expectedFizzBuzzValue = [
+          1,
+          2,
+          'Fizz',
+          4,
+          'Buzz',
+          'Fizz',
+          7,
+          8,
+          'Fizz',
+          'Buzz',
+          11,
+          'Fizz',
+          13,
+          14,
+          'FizzBuzz'
+        ];
+
+        $fizzBuzzService = $this->app->make(FizzBuzzService::class);
+
+        $this->assertEquals(
+          $expectedFizzBuzzValue,
+          $fizzBuzzService->generateSeries($offset, $limit)
+        );
     }
 }
