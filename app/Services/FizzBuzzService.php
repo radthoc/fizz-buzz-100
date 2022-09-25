@@ -12,6 +12,8 @@ class FizzBuzzService implements FizzBuzzServiceInterface
   const BUZZ = 'Buzz';
   const BUZZ_FACTOR = 5;
 
+  const FIZZBUZZ = 'FizzBuzz';
+
   function __construct()
   {
   }
@@ -26,7 +28,9 @@ class FizzBuzzService implements FizzBuzzServiceInterface
   {
       $numberSeries = [];
 
-      foreach ($this->getNumberSeries($offset, $limit) as $number) {
+      $numberRange = $this->getNumberSeries($offset, $limit);
+
+      foreach ($numberRange as $number) {
           $numberInSeries = $number;
 
           if ($this->isMultipleOf(self::FIZZ_FACTOR,$number)) {
@@ -35,6 +39,10 @@ class FizzBuzzService implements FizzBuzzServiceInterface
 
           if ($this->isMultipleOf(self::BUZZ_FACTOR,$number)) {
               $numberInSeries = self::BUZZ;
+          }
+
+          if ($this->isFizzBuzz($number)) {
+              $numberInSeries = self::FIZZBUZZ;
           }
 
           $numberSeries[] = $numberInSeries;
@@ -52,6 +60,17 @@ class FizzBuzzService implements FizzBuzzServiceInterface
   private function getNumberSeries(int $offset, int $limit): array
   {
     return range($offset, $limit);
+  }
+
+  /**
+   * @param int $number
+   *
+   * @return bool
+   */
+  private function isFizzBuzz(int $number): bool
+  {
+    return $this->isMultipleOf(self::FIZZ_FACTOR, $number) &&
+        $this->isMultipleOf(self::BUZZ_FACTOR, $number);
   }
 
   /**
