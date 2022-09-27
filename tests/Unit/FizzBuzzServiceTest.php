@@ -8,7 +8,6 @@ use App\Services\FizzBuzzService;
 class FizzBuzzServiceTest extends TestCase
 {
     /**
-     * Basic test case
      *
      * @return void
      */
@@ -29,7 +28,6 @@ class FizzBuzzServiceTest extends TestCase
 
 
     /**
-     * Basic test case
      *
      * @return void
      */
@@ -50,7 +48,6 @@ class FizzBuzzServiceTest extends TestCase
 
 
     /**
-     * Basic test case
      *
      * @return void
      */
@@ -76,7 +73,6 @@ class FizzBuzzServiceTest extends TestCase
 
 
     /**
-     * Basic test case
      *
      * @return void
      */

@@ -1,21 +1,27 @@
 <?php
 namespace App\Services;
 
+use App\Helpers\NumbersHelperInterface;
+use App\Services\Rules\RulesProviderInterface;
+
 /**
  *
  */
 class FizzBuzzService implements FizzBuzzServiceInterface
 {
-  const FIZZ = 'Fizz';
-  const FIZZ_FACTOR = 3;
+  /** @var NumbersHelperInterface */
+  private $numbersHelper;
 
-  const BUZZ = 'Buzz';
-  const BUZZ_FACTOR = 5;
+  /** @var RulesProviderInterface */
+  private $rulesProvider;
 
-  const FIZZBUZZ = 'FizzBuzz';
-
-  function __construct()
+  function __construct(
+      NumbersHelperInterface $numbersHelper,
+      RulesProviderInterface $rulesProvider
+  )
   {
+      $this->numbersHelper = $numbersHelper;
+      $this->rulesProvider = $rulesProvider;
   }
 
   /**
@@ -28,58 +34,29 @@ class FizzBuzzService implements FizzBuzzServiceInterface
   {
       $numberSeries = [];
 
-      $numberRange = $this->getNumberSeries($offset, $limit);
+      $numberRange = $this->numbersHelper->getNumberSeries($offset, $limit);
 
       foreach ($numberRange as $number) {
-          $numberInSeries = $number;
-
-          if ($this->isMultipleOf(self::FIZZ_FACTOR,$number)) {
-              $numberInSeries = self::FIZZ;
-          }
-
-          if ($this->isMultipleOf(self::BUZZ_FACTOR,$number)) {
-              $numberInSeries = self::BUZZ;
-          }
-
-          if ($this->isFizzBuzz($number)) {
-              $numberInSeries = self::FIZZBUZZ;
-          }
-
-          $numberSeries[] = $numberInSeries;
+          $numberSeries[] = $this->getFizzBuzzValue($number);
       };
 
       return $numberSeries;
   }
 
-  /**
-   * @param int $offset
-   * @param int $limit
-   *
-   * @return array
-   */
-  private function getNumberSeries(int $offset, int $limit): array
+  private function getFizzBuzzValue(int $number)
   {
-    return range($offset, $limit);
-  }
+      $numberInSeries = $number;
 
-  /**
-   * @param int $number
-   *
-   * @return bool
-   */
-  private function isFizzBuzz(int $number): bool
-  {
-    return $this->isMultipleOf(self::FIZZ_FACTOR, $number) &&
-        $this->isMultipleOf(self::BUZZ_FACTOR, $number);
-  }
+      $rules = $this->rulesProvider->getRules();
 
-  /**
-   * @param int $factor
-   * @param int $number
-   *
-   * @return bool
-   */  private function isMultipleOf(int $factor, int $number): bool
-  {
-    return $number % $factor == 0;
+      foreach ($rules as $rule) {
+          $fizzBuzzValue = $rule->getValue($number);
+
+          if ($fizzBuzzValue !== null) {
+              $numberInSeries = $fizzBuzzValue;
+          }
+      }
+
+      return $numberInSeries;
   }
 }
