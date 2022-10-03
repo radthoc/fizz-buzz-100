@@ -43,4 +43,6 @@ Buzz
 - Add unit test coverage for the _NumbersHelper_, _RulesProvider_, _FizzRule_, _BuzzRule_, _FizzBuzzRule_
 - Add possibility to set the series offset and limit as parameters of the command
 - Check formatting (my **PhpStorm** license expired and had to improvise with **Atom**)
+- Dockerize it
+- Upgrade to latest version of PHP
 - Clean the framework from not needed features
